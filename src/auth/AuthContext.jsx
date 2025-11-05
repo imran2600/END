@@ -10,7 +10,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
 
-  const setSessionFromApi = (payload, nameOverride) => {
+  const setSessionFromApi = useCallback((payload, nameOverride) => {
     if (payload?.access_token) localStorage.setItem(KEY_TOKEN, payload.access_token);
     if (payload?.refresh_token) localStorage.setItem("refresh_token", payload.refresh_token);
     const u = payload?.user ?? payload ?? {};
@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
     setUser(sessionUser);
     localStorage.setItem(KEY_USER, JSON.stringify(sessionUser));
     return sessionUser;
-  };
+  }, []);
 
   useEffect(() => {
     try {
