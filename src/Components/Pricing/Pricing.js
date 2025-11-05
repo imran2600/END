@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Pricing.module.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import useAdminData from '../../pages/AdminPortal/hooks/useAdminData.js';
@@ -170,9 +171,11 @@ const Pricing = () => {
                   {renderFeatures(plan)}
                 </div>
                 
-                <button className={styles.ctaButton}>
-                  Get Started
-                </button>
+                <Link to="/signup">
+                  <button className={styles.ctaButton}>
+                    Get Started
+                  </button>
+                </Link>
               </div>
             </Col>
           ))}
@@ -208,9 +211,11 @@ const Pricing = () => {
                       {renderFeatures(plan)}
                     </div>
                     
-                    <button className={styles.ctaButton}>
-                      Get started
-                    </button>
+                    <Link to="/signup">
+                      <button className={styles.ctaButton}>
+                        Get Started
+                      </button>
+                    </Link>
                   </div>
                 </div>
               ))}
