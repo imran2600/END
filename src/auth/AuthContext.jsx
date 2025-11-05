@@ -10,6 +10,7 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
 
+  // Memoized function to set session from API response
   const setSessionFromApi = useCallback((payload, nameOverride) => {
     if (payload?.access_token) localStorage.setItem(KEY_TOKEN, payload.access_token);
     if (payload?.refresh_token) localStorage.setItem("refresh_token", payload.refresh_token);
