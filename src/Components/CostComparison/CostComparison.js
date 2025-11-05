@@ -8,31 +8,46 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CostComparison = () => {
   const titleRef = useRef(null);
+  const cardsRef = useRef([]);
 
-  const comparisonData = [
+  const sections = [
     {
-      category: "Buyer Engagement",
-      icon: <FiCheckCircle className={styles.icon}/>,
+      icon: "🎬",
+      title: "Cinematic Quality",
       items: [
-        { feature: "Inquiries", ai: "4x more", traditional: "Standard", advantage: "Listings with video get 4x more inquiries" },
-        { feature: "Virtual Tours", ai: "Essential", traditional: "Optional", advantage: "67% of buyers want virtual tours before visiting" }
-      ]
+        { label: "AI-Enhanced Production", desc: "Smooth pans, dynamic motion, and professional music." },
+        { label: "Consistent Branding", desc: "Every video features your logo, colors, and call-to-action." },
+        { label: "Versatile Formats", desc: "Perfect for MLS, Instagram Reels, and YouTube." }
+      ],
+      footer: "Looks just as good as a filmed walkthrough — created in a fraction of the time."
     },
     {
-      category: "Agent Advantage",
-      icon: <FiDollarSign className={styles.icon}/>,
-      items: [
-        { feature: "Win Listings", ai: "81% more likely", traditional: "Standard rate", advantage: "81% of sellers prefer agents who use video" },
-        { feature: "Turnaround", ai: "24 hours", traditional: "2-3 weeks", advantage: "Faster time to market" }
-      ]
+      icon: "⚡",
+      title: "Faster Turnaround",
+      comparison: [
+        { service: "QuantumTour", value: "Ready in 24 hours", isGood: true },
+        { service: "Traditional Shoots", value: "2–3 week wait time", isGood: false }
+      ],
+      footer: "Get your listings online faster — speed matters when the market moves quickly."
     },
     {
-      category: "Cost & Value",
-      icon: <FiFilm className={styles.icon}/>,
+      icon: "💰",
+      title: "Smarter Investment",
+      comparison: [
+        { service: "QuantumTour", value: "$49–$149", isGood: true },
+        { service: "Traditional Videography", value: "$1,500–$5,000+", isGood: false }
+      ],
+      footer: "Same cinematic look. 90% less cost. Ideal for every property."
+    },
+    {
+      icon: "🔥",
+      title: "Agent Advantage",
       items: [
-        { feature: "Production Cost", ai: "$49-$149", traditional: "$1,500-$5,000", advantage: "90% cheaper" },
-        { feature: "Quality", ai: "Professional", traditional: "Professional", advantage: "Same quality, better price" }
-      ]
+        { label: "", desc: "Win listings with professional video marketing — no film crew needed." },
+        { label: "", desc: "Offer premium marketing on every listing, not just luxury ones." },
+        { label: "", desc: "Create content for social media in minutes, not days." }
+      ],
+      footer: "Agents using video marketing are 81% more likely to win new listings."
     }
   ];
 
@@ -40,106 +55,109 @@ const CostComparison = () => {
     if (titleRef.current) {
       gsap.fromTo(
         titleRef.current,
-        { x: 200, opacity: 0 },
+        { y: 50, opacity: 0 },
         {
-          x: 0,
+          y: 0,
           opacity: 1,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.8,
           scrollTrigger: {
             trigger: titleRef.current,
             start: "top 80%",
-            toggleActions: "play none none reverse",
+            toggleActions: "play none none none",
           }
         }
       );
     }
+
+    cardsRef.current.forEach((card, index) => {
+      if (card) {
+        gsap.fromTo(
+          card,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            delay: index * 0.15,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            }
+          }
+        );
+      }
+    });
   }, []);
 
   return (
     <section className={styles.section}>
-      <img src="/images/building.png" alt="Building" className={styles.buildingImage} />
-
       <div className={styles.container}>
         <div className={styles.titleContainer} ref={titleRef}>
-          <h2 className={styles.mainTitle}>Video Tours = More Buyers. Period.</h2>
+          <h2 className={styles.mainTitle}>The New Standard in Listing Videos</h2>
           <p className={styles.subtitle}>
-            QuantumTour helps you compete at the level of top agents — without the cost or delay.
+            QuantumTour delivers cinematic property videos that rival traditional videography — at a fraction of the cost and turnaround time.
+          </p>
+          <p className={styles.subtitle}>
+            No camera crews. No waiting weeks. Just upload your photos and get a polished, ready-to-share video within 24 hours.
           </p>
         </div>
 
-        <div className={styles.desktopTable}>
-          <table className={styles.comparisonTable}>
-            <thead>
-              <tr className={styles.tableHeader}>
-                <th>Category</th>
-                <th>Feature</th>
-                <th><FiCheckCircle /> AI Service</th>
-                <th><FiXCircle /> Traditional</th>
-                <th>Advantage</th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparisonData.map((category, catIndex) => (
-                <React.Fragment key={catIndex}>
-                  {category.items.map((item, itemIndex) => (
-                    <tr key={itemIndex} className={styles.tableRow}>
-                      {itemIndex === 0 && (
-                        <td rowSpan={category.items.length} className={styles.categoryCell}>
-                          {category.icon} {category.category}
-                        </td>
-                      )}
-                      <td className={styles.featureCell}>{item.feature}</td>
-                      <td className={styles.aiCell}>{item.ai}</td>
-                      <td className={styles.traditionalCell}>{item.traditional}</td>
-                      <td className={styles.advantageCell}>{item.advantage}</td>
-                    </tr>
-                  ))}
-                </React.Fragment>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className={styles.mobileCards}>
-          {comparisonData.map((category, catIndex) => (
-            <div key={catIndex} className={styles.categoryCard}>
-              <div className={styles.categoryHeader}>
-                {category.icon}
-                <h3 className={styles.categoryTitle}>{category.category}</h3>
+        <div className={styles.sectionsGrid}>
+          {sections.map((section, index) => (
+            <div 
+              key={index} 
+              className={styles.featureCard}
+              ref={(el) => (cardsRef.current[index] = el)}
+            >
+              <div className={styles.cardHeader}>
+                <span className={styles.cardIcon}>{section.icon}</span>
+                <h3 className={styles.cardTitle}>{section.title}</h3>
               </div>
-              
-              {category.items.map((item, itemIndex) => (
-                <div key={itemIndex} className={styles.comparisonCard}>
-                  <h4 className={styles.featureTitle}>{item.feature}</h4>
-                  
-                  <div className={styles.comparisonRow}>
-                    <div className={styles.serviceType}>
-                      <FiCheckCircle className={styles.aiIcon} />
-                      <span>AI Service</span>
+
+              {section.items && (
+                <ul className={styles.itemsList}>
+                  {section.items.map((item, idx) => (
+                    <li key={idx} className={styles.listItem}>
+                      <FiCheckCircle className={styles.checkIcon} />
+                      <div>
+                        {item.label && <strong>{item.label}</strong>}
+                        {item.label && " — "}
+                        {item.desc}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {section.comparison && (
+                <div className={styles.comparisonList}>
+                  {section.comparison.map((comp, idx) => (
+                    <div key={idx} className={`${styles.compItem} ${comp.isGood ? styles.good : styles.bad}`}>
+                      {comp.isGood ? <FiCheckCircle /> : <FiXCircle />}
+                      <span className={styles.compService}>{comp.service}</span>
+                      <span className={styles.compValue}>{comp.value}</span>
                     </div>
-                    <div className={styles.serviceValue}>
-                      {item.ai}
-                    </div>
-                  </div>
-                  
-                  <div className={styles.comparisonRow}>
-                    <div className={styles.serviceType}>
-                      <FiXCircle className={styles.traditionalIcon} />
-                      <span>Traditional</span>
-                    </div>
-                    <div className={styles.serviceValue}>
-                      {item.traditional}
-                    </div>
-                  </div>
-                  
-                  <div className={styles.advantageBadge}>
-                    {item.advantage}
-                  </div>
+                  ))}
                 </div>
-              ))}
+              )}
+
+              <p className={styles.cardFooter}>{section.footer}</p>
             </div>
           ))}
+        </div>
+
+        <div className={styles.summaryBox}>
+          <h3 className={styles.summaryTitle}>In short:</h3>
+          <p className={styles.summaryText}>
+            QuantumTour gives you the quality of traditional videography — without the cost, delay, or limits.
+          </p>
+        </div>
+
+        <div className={styles.ctaBox}>
+          <h3 className={styles.ctaTitle}>Create Your First Tour →</h3>
+          <p className={styles.ctaText}>Get a cinematic listing video in under 24 hours. No filming required.</p>
+          <button className={styles.ctaButton}>Get Started</button>
         </div>
       </div>
     </section>
