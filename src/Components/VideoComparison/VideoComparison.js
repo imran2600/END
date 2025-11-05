@@ -83,11 +83,6 @@ const VideoComparison = ({
     return () => clearInterval(interval);
   }, [isPlaying, comparisons?.length, slideInterval, goToNext]);
 
-  const resetAutoPlay = () => {
-    setIsPlaying(false);
-    setTimeout(() => setIsPlaying(true), slideInterval * 2);
-  };
-
   // GSAP animations
   useEffect(() => {
     // Create elegant animated background
