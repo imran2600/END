@@ -45,20 +45,25 @@ const Hero = ({ title, subtitle }) => {
         .to(text, { x: 0, opacity: 1, duration: 1.0, delay: 0.35, ease: "power2.out" }, 0.15)
         .to(buttons, { x: 0, opacity: 1, duration: 0.8, stagger: 0.15, ease: "power2.out" }, 0.5);
 
-      const scrollTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: hero,
-          start: "top top", 
-          end: () => "+=" + Math.max(hero.offsetHeight, window.innerHeight * 0.6), 
-          scrub: 0.3, 
-        }
-      });
+      // Only apply scroll-out animation on desktop (>768px)
+      const isMobile = window.innerWidth <= 768;
+      
+      if (!isMobile) {
+        const scrollTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: hero,
+            start: "top top", 
+            end: () => "+=" + Math.max(hero.offsetHeight, window.innerHeight * 0.6), 
+            scrub: 0.3, 
+          }
+        });
 
-      scrollTl
-        .to(clouds, { y: -200, opacity: 0, ease: "none" }, 0)
-        .to(house, { x: 300, opacity: 0, ease: "none" }, 0)
-        .to(text, { x: -100, opacity: 0, ease: "none" }, 0)
-        .to(buttons, { x: -80, opacity: 0, stagger: 0.12, ease: "none" }, 0);
+        scrollTl
+          .to(clouds, { y: -200, opacity: 0, ease: "none" }, 0)
+          .to(house, { x: 300, opacity: 0, ease: "none" }, 0)
+          .to(text, { x: -100, opacity: 0, ease: "none" }, 0)
+          .to(buttons, { x: -80, opacity: 0, stagger: 0.12, ease: "none" }, 0);
+      }
 
     }, heroRef);
 
