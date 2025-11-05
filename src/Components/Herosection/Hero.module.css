@@ -52,10 +52,12 @@
   max-width: 1200px;
   margin: 0 auto;
   padding-left: 2rem;
+  padding-right: 2rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end; /* align items to bottom */
+  align-items: flex-end;
   gap: 2rem;
+  box-sizing: border-box;
 }
 
 /* Text Content - Left Side */
@@ -69,7 +71,8 @@
 }
 
 .textContent h1 {
-  width: 120%;
+  width: 100%;
+  max-width: 100%;
   font-size: 50px;
   margin-bottom: 1.0px;
   font-weight: 800;
@@ -77,9 +80,6 @@
   line-height: 1.2;
   padding-top: 40px;
   padding-bottom: 0px;
-  
-
-  
 }
 
 .textContent p {
@@ -114,10 +114,10 @@
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  width: 300%;
-  padding-bottom: 500px;
-  justify-content: flex-start;  /* or center */
-  width: 50%;                  /* full width */
+  width: 100%;
+  max-width: 600px;
+  padding-bottom: 50px;
+  justify-content: flex-start;
 }
 
 .primaryButton, 
@@ -125,14 +125,15 @@
 .tertiaryButton {
   padding: 1rem 1.5rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 35px;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 80%;
+  width: auto;
+  min-width: 120px;
   text-align: center;
-  border-radius: 35px;
+  white-space: nowrap;
 }
 
 .primaryButton {
@@ -177,8 +178,13 @@ background:linear-gradient(135deg,#a855f7,#1fb454);
     text-align: center;
     max-width: 100%;
     order: 2;
+    padding: 0 1rem;
   }
   
+  .textContent h1 {
+    padding-right: 0;
+    width: 100%;
+  }
 
   .houseContainer {
     order: 1;
@@ -191,11 +197,9 @@ background:linear-gradient(135deg,#a855f7,#1fb454);
     flex-wrap: wrap;
     justify-content: center;
     max-width: 100%;
-    padding-bottom: 140px;
+    padding-bottom: 80px;
+    gap: 0.75rem;
   }
-  .textContent h1 {
-  padding-right: 70px; 
-}
 
   .primaryButton,
   .secondaryButton,
@@ -212,8 +216,14 @@ background:linear-gradient(135deg,#a855f7,#1fb454);
     gap: 2rem;
   }
 
+  .textContent {
+    padding: 0 0.5rem;
+  }
+
   .textContent h1 {
     font-size: 2.2rem;
+    width: 100%;
+    padding-right: 0;
   }
 
   .textContent p {
@@ -223,25 +233,28 @@ background:linear-gradient(135deg,#a855f7,#1fb454);
 
   .house {
     width: 100%;
-    
   }
 
   .buttonGroup {
     flex-direction: column;
-align-items: end;
-        padding-left: 110px; 
-
-      }
+    align-items: center;
+    padding-left: 0;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    gap: 0.75rem;
+  }
 
   .primaryButton,
   .secondaryButton,
   .tertiaryButton {
-    max-width: 250px;
+    max-width: 100%;
     width: 100%;
+    min-width: auto;
   }
 
   .clouds {
-    transform: scale(1.2); /* Make clouds larger on mobile for better coverage */
+    transform: scale(1.2);
   }
 }
 
@@ -289,19 +302,23 @@ align-items: end;
   .primaryButton, 
   .secondaryButton,
   .tertiaryButton {
-    padding: 0.6rem 0.8rem;
-  font-size: 0.8rem;/* Smaller font size */
-    Text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6); /* Text shadow */
-    width: 40%;  
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+    width: auto;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 360px) {
+  .primaryButton, 
+  .secondaryButton,
+  .tertiaryButton {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    min-width: 120px;
   }
   
-  /* Optional: Make buttons even smaller on very small screens */
-  @media (max-width: 360px) {
-    .primaryButton, 
-    .secondaryButton,
-    .tertiaryButton {
-      padding: 0.4rem 0.8rem;
-      font-size: 0.8rem;
-    }
+  .buttonGroup {
+    gap: 0.5rem;
   }
 }
