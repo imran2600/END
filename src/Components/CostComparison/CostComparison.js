@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './CostComparison.module.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -157,7 +158,9 @@ const CostComparison = () => {
         <div className={styles.ctaBox}>
           <h3 className={styles.ctaTitle}>Create Your First Tour →</h3>
           <p className={styles.ctaText}>Get a cinematic listing video in under 24 hours. No filming required.</p>
-          <button className={styles.ctaButton}>Get Started</button>
+          <Link to="/signup">
+            <button className={styles.ctaButton}>Get Started</button>
+          </Link>
         </div>
       </div>
     </section>
