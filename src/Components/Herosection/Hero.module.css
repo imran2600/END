@@ -190,9 +190,12 @@ background:linear-gradient(135deg,#a855f7,#1fb454);
   }
 
   .houseContainer {
+    position: relative;
     order: 1;
     max-width: 400px;
     margin: 0 auto;
+    right: auto;
+    bottom: auto;
   }
 
   .buttonGroup {
