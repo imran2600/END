@@ -144,8 +144,7 @@ const VideoComparison = ({
       titleElement.innerHTML = "";
       titleElement.appendChild(textContainer);
       
-      const wordElements = titleElement.querySelectorAll(`.${styles.word}`);
-      if (wordElements.length > 0) {
+const wordElements = titleElement.querySelectorAll(`[class*="word"]`);      if (wordElements.length > 0) {
         gsap.set(wordElements, {
           opacity: 0,
           y: 80

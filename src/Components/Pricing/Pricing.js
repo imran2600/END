@@ -47,33 +47,34 @@ const Pricing = () => {
   }, [currentSlide]);
 
   useEffect(() => {
-    gsap.fromTo(`.${styles.sectionTitle}`, 
-      { y: 50, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: `.${styles.sectionTitle}`,
-          start: 'top 80%',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
+    // ✅ NEW (fixed):
+gsap.fromTo(sectionRef.current ? sectionRef.current.querySelector('[class*="sectionTitle"]') : null, 
+  { y: 50, opacity: 0 },
+  { 
+    y: 0, 
+    opacity: 1, 
+    duration: 0.8,
+    scrollTrigger: {
+      trigger: sectionRef.current ? sectionRef.current.querySelector('[class*="sectionTitle"]') : null,
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
+  }
+);
 
-    gsap.fromTo(`.${styles.backgroundImage}`, 
-      { opacity: 0 },
-      { 
-        opacity: 1, 
-        duration: 1.5,
-        scrollTrigger: {
-          trigger: `.${styles.pricingSection}`,
-          start: 'top bottom',
-          toggleActions: 'play none none reverse'
-        }
-      }
-    );
-
+    // ✅ NEW (fixed):
+gsap.fromTo(sectionRef.current ? sectionRef.current.querySelector('[class*="backgroundImage"]') : null, 
+  { opacity: 0 },
+  { 
+    opacity: 1, 
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: sectionRef.current,
+      start: 'top bottom',
+      toggleActions: 'play none none reverse'
+    }
+  }
+);
     cardRefs.current.forEach((card, index) => {
       if (card) {
         gsap.fromTo(card, 
