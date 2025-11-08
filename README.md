@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Cinetours
 
 A React-based web application for creating and managing cinematic real estate tours.
@@ -112,3 +113,6 @@ src/
 
 Private project - All rights reserved
 
+=======
+# END
+>>>>>>> 881cd79a23e2ddb54ad24e8074be6643e35570d8
